@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De consumidor digital a emprendedor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#111110;
+    --gold:#c9a44c;
+    --gold-soft:#e8d5a3;
+    --ink:#f2efe8;
+    --ink-dim:#9a958a;
+    --line:#232220;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--ink); font-family:'DM Sans', sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  #gate{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px; text-align:center;}
+  #gate p{font-family:'Cormorant Garamond', serif; font-size:22px; font-style:italic; color:var(--ink-dim);}
+  #content{display:none;}
+  .wrap{max-width:640px; margin:0 auto; padding:0 24px;}
+
+  .hero{border-bottom:1px solid var(--line);}
+  .hero--img{padding:0; margin:0 -24px;}
+  .pilar--img{padding:0; margin:0 -24px; border-bottom:none;}
+  .hero-img, .pilar-img{
+    display:block; width:100%; height:auto;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, black 48px, black calc(100% - 48px), transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0, black 48px, black calc(100% - 48px), transparent 100%);
+  }
+  .hero-img--yo{margin-top:-48px;}
+  .pilar-img{margin-top:-48px;}
+
+  .pilar{padding:64px 0; border-bottom:1px solid var(--line);}
+  .pilar .tag{font-size:13px; color:var(--gold); letter-spacing:0.02em; margin-bottom:12px;}
+  .pilar h2{font-family:'Syne', sans-serif; font-weight:700; font-size:clamp(24px, 4.2vw, 30px); line-height:1.18; max-width:20ch;}
+  .pilar .lede{margin-top:16px; font-family:'Cormorant Garamond', serif; font-size:21px; color:var(--gold-soft); font-style:italic; max-width:26ch;}
+  .pilar p.body{margin-top:16px; font-size:15.5px; color:var(--ink-dim); max-width:52ch;}
+  .checklist{margin-top:24px; display:flex; flex-direction:column; gap:10px;}
+  .checklist .item{display:flex; gap:14px; align-items:flex-start; padding:14px 16px; background:var(--bg-2); border:1px solid var(--line);}
+  .checklist .item .mark{color:var(--gold); font-size:15px; margin-top:1px; flex-shrink:0;}
+  .checklist .item p{font-size:15px; color:var(--ink);}
+
+  /* Puente hacia el test */
+  .bridge{padding:64px 0; text-align:center; border-bottom:1px solid var(--line);}
+  .bridge--img{padding:0; margin:0 -24px; border-bottom:none;}
+  .bridge-img-wrap{position:relative; line-height:0;}
+  .bridge-btn{
+    position:absolute; left:8%; top:73%; width:54%; height:10%;
+    background:transparent; border:none; cursor:pointer; padding:0;
+  }
+  .bridge .tag{font-size:13px; color:var(--gold); letter-spacing:0.02em; margin-bottom:14px;}
+  .bridge h2{font-family:'Syne', sans-serif; font-weight:700; font-size:clamp(24px, 4.5vw, 30px); max-width:22ch; margin:0 auto;}
+  .bridge p{margin-top:16px; font-family:'Cormorant Garamond', serif; font-size:20px; color:var(--ink-dim); max-width:38ch; margin-left:auto; margin-right:auto;}
+  .start-btn{
+    margin-top:32px; display:inline-block; background:var(--gold); color:#0a0a0a;
+    font-family:'DM Sans', sans-serif; font-weight:500; font-size:15px;
+    padding:15px 32px; border:none; cursor:pointer; letter-spacing:0.01em;
+  }
+  .start-btn:hover{background:var(--gold-soft);}
+
+  /* Test */
+  #quiz-panel{display:none; padding:56px 0 96px;}
+  .progress-bar{height:2px; background:var(--line); margin-bottom:40px; position:relative;}
+  .progress-bar-fill{height:2px; background:var(--gold); width:0%; transition:width .3s ease;}
+  .q-block{margin-bottom:48px;}
+  .q-block .q-num{font-size:13px; color:var(--gold); margin-bottom:10px;}
+  .q-block .q-text{font-family:'Syne', sans-serif; font-weight:700; font-size:19px; line-height:1.35; max-width:34ch;}
+  .options{margin-top:18px; display:flex; flex-direction:column; gap:10px;}
+  .opt{
+    display:block; padding:15px 16px; background:var(--bg-2); border:1px solid var(--line);
+    font-size:15px; color:var(--ink); cursor:pointer; transition:border-color .15s ease, background .15s ease;
+  }
+  .opt:hover{border-color:var(--gold);}
+  .opt.selected{border-color:var(--gold); background:#1a1712;}
+  .opt input{display:none;}
+
+  .see-result{
+    margin-top:16px; width:100%; background:var(--gold); color:#0a0a0a;
+    font-family:'DM Sans', sans-serif; font-weight:500; font-size:15.5px;
+    padding:17px; border:none; cursor:pointer; opacity:.4; pointer-events:none; transition:opacity .2s ease;
+  }
+  .see-result.ready{opacity:1; pointer-events:auto;}
+
+  /* Resultado */
+  #result-panel{display:none; padding:64px 0 96px; text-align:center;}
+  #result-panel .tag{font-size:13px; color:var(--gold); letter-spacing:0.02em;}
+  #result-panel h2{font-family:'Syne', sans-serif; font-weight:800; font-size:clamp(28px,5vw,38px); margin-top:14px;}
+  #result-panel p{margin-top:20px; font-family:'Cormorant Garamond', serif; font-size:21px; color:var(--ink-dim); max-width:44ch; margin-left:auto; margin-right:auto;}
+  #result-panel .signature{margin-top:32px; font-family:'Cormorant Garamond', serif; font-style:italic; font-size:17px; color:var(--ink-dim);}
+  .next-step{margin-top:56px; padding-top:0; border-top:none; margin-left:-24px; margin-right:-24px;}
+  .next-step-img{
+    display:block; width:100%; height:auto;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, black 48px, black 100%);
+    mask-image:linear-gradient(to bottom, transparent 0, black 48px, black 100%);
+  }
+
+  footer{padding:40px 24px 56px; text-align:center; font-size:13px; color:var(--ink-dim); border-top:1px solid var(--line);}
+</style>
+</head>
+<body>
+
+<div id="gate"><p>Verificando acceso…</p></div>
+
+<div id="content">
+  <div class="wrap">
+
+    <section class="hero hero--img">
+      <img class="hero-img" src="hero.png" alt="De consumidor digital a emprendedor">
+      <img class="hero-img hero-img--yo" src="yo.png" alt="Ale Torres">
+    </section>
+
+    <section class="pilar pilar--img">
+      <img class="pilar-img" src="pila1.png" alt="Pilar 1 — El sistema importa más que tu esfuerzo">
+    </section>
+
+    <section class="pilar pilar--img">
+      <img class="pilar-img" src="pila2.png" alt="Pilar 2 — Cómo distinguir un sistema real de una promesa vacía">
+    </section>
+
+    <section class="pilar pilar--img">
+      <img class="pilar-img" src="pila3.png" alt="Pilar 3 — Empieza chico, sin perder lo construido">
+    </section>
+
+    <section class="bridge bridge--img">
+      <div class="bridge-img-wrap">
+        <img class="pilar-img" src="cierre.png" alt="¿Qué tipo de emprendedor eres tú? Haz el test">
+        <button class="bridge-btn" id="start-quiz" aria-label="Haz el test"></button>
+      </div>
+    </section>
+
+    <section id="quiz-panel" class="wrap">
+      <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill"></div></div>
+      <div id="questions"></div>
+      <button class="see-result" id="see-result-btn">Ver mi resultado</button>
+    </section>
+
+    <section id="result-panel">
+      <div class="tag" id="result-tag">Tu resultado</div>
+      <h2 id="result-title"></h2>
+      <p id="result-text"></p>
+      <p class="signature">— Ale Torres</p>
+      <div class="next-step">
+        <img class="next-step-img" src="webinar.png" alt="Ya tienes tu punto de partida. Nos vemos en el webinar">
+      </div>
+    </section>
+
+  </div>
+
+  <footer>AUREX · Riqueza en Expansión</footer>
+</div>
+
+<script>
+  // ---------- Gate por lead_id ----------
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const leadId = params.get('lead_id');
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('content');
+    if (!leadId) {
+      gate.innerHTML = '<p>Este contenido es exclusivo para quienes se registraron.<br>Regresa al enlace que recibiste por correo o WhatsApp.</p>';
+      return;
+    }
+    // TODO: sustituir por verificación real contra Firestore (colección lime_leads)
+    gate.style.display = 'none';
+    content.style.display = 'block';
+  })();
+
+  // ---------- Datos del test ----------
+  const questions = [
+    { q: "Cuando piensas en generar ingresos extra, ¿qué te suena mejor?",
+      opts: [["Construir algo junto con un equipo que avanza conmigo","A"],["Manejar y hacer crecer mi propio capital, a mi manera","B"],["Todavía no tengo claro qué modelo me acomoda más","C"]] },
+    { q: "Si tuvieras que elegir, preferirías...",
+      opts: [["Depender de un sistema colaborativo, no solo de mí","A"],["Tener control total, sin depender de nadie más","B"],["Explorar varias opciones antes de comprometerme","C"]] },
+    { q: "¿Qué tan cómodo te sientes hablando del tema con otras personas?",
+      opts: [["Se me da natural","A"],["Prefiero no depender de convencer a nadie","B"],["Depende de qué tan convencido esté yo primero","C"]] },
+    { q: "Sobre el tiempo que le dedicarías, ¿cómo lo ves?",
+      opts: [["Sé que toma tiempo, y estoy dispuesto/a a construirlo con paciencia","A"],["Quiero medir resultados por mí mismo/a, a mi ritmo","B"],["Aún no sé cuánto tiempo real le puedo dedicar","C"]] },
+    { q: "Cuando algo no avanza tan rápido como esperabas, ¿qué sueles hacer?",
+      opts: [["Sigo, sé que el resultado se construye con el tiempo","A"],["Ajusto y optimizo por mi cuenta hasta que funcione","B"],["Me cuestiono si es lo correcto para mí","C"]] },
+    { q: "¿Qué describe mejor lo que buscas ahora?",
+      opts: [["Pertenecer a algo, no hacerlo solo/a","A"],["Diversificar y hacer crecer lo que ya tengo","B"],["Entender primero, antes de decidir hacia dónde ir","C"]] },
+    { q: "Sobre el capital para empezar...",
+      opts: [["Puedo empezar con poco y crecer desde ahí","A"],["Tengo algo de capital que quiero mover con más criterio","B"],["Todavía estoy viendo con cuánto me siento cómodo/a","C"]] },
+    { q: "¿Qué te generaría más satisfacción?",
+      opts: [["Ver crecer a un equipo conmigo","A"],["Ver crecer mi propio patrimonio, con mis decisiones","B"],["Sentir que por fin entendí bien de qué se trata todo esto","C"]] },
+    { q: "Hoy, ¿qué tan definido tienes tu siguiente paso?",
+      opts: [["Ya sé que quiero construir algo con otros","A"],["Ya sé que quiero manejarlo yo directamente","B"],["Todavía no lo tengo claro, por eso estoy investigando","C"]] }
+  ];
+
+  const answers = new Array(questions.length).fill(null);
+  const qContainer = document.getElementById('questions');
+
+  questions.forEach((item, i) => {
+    const block = document.createElement('div');
+    block.className = 'q-block';
+    block.innerHTML = `
+      <div class="q-num">Pregunta ${i + 1} de ${questions.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="options">
+        ${item.opts.map((o, j) => `
+          <label class="opt" data-q="${i}" data-letter="${o[1]}">
+            <input type="radio" name="q${i}">
+            ${o[0]}
+          </label>
+        `).join('')}
+      </div>
+    `;
+    qContainer.appendChild(block);
+  });
+
+  document.getElementById('start-quiz').addEventListener('click', () => {
+    document.getElementById('quiz-panel').style.display = 'block';
+    document.getElementById('quiz-panel').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  qContainer.addEventListener('click', (e) => {
+    const opt = e.target.closest('.opt');
+    if (!opt) return;
+    const qIndex = opt.dataset.q;
+    document.querySelectorAll(`.opt[data-q="${qIndex}"]`).forEach(el => el.classList.remove('selected'));
+    opt.classList.add('selected');
+    answers[qIndex] = opt.dataset.letter;
+
+    const answered = answers.filter(a => a !== null).length;
+    document.getElementById('progress-fill').style.width = (answered / questions.length * 100) + '%';
+    const btn = document.getElementById('see-result-btn');
+    if (answered === questions.length) btn.classList.add('ready');
+  });
+
+  const results = {
+    A: {
+      title: "El Constructor",
+      text: "Tus respuestas muestran algo claro: no buscas hacerlo solo. Entiendes que un sistema bien elegido rinde más que el esfuerzo individual, y estás dispuesto/a a construir con paciencia. Ese es exactamente el perfil que más aprovecha un negocio con apalancamiento de comunidad."
+    },
+    B: {
+      title: "El Independiente",
+      text: "Prefieres el control directo — manejar tu propio capital, con tus propias decisiones, sin depender de convencer a nadie más. No es que te falte ambición, es que buscas un modelo distinto: uno donde el resultado dependa de tu criterio, no de tu red."
+    },
+    C: {
+      title: "El Explorador",
+      text: "Todavía estás formando claridad, y eso está bien — la mayoría de quienes hoy tienen algo sólido empezaron exactamente aquí. Lo que sigue no es lanzarte a lo primero que veas, sino entender mejor antes de decidir."
+    }
+  };
+
+  document.getElementById('see-result-btn').addEventListener('click', () => {
+    if (answers.includes(null)) return;
+    const counts = { A: 0, B: 0, C: 0 };
+    answers.forEach(a => counts[a]++);
+    const winner = Object.keys(counts).reduce((a, b) => counts[a] >= counts[b] ? a : b);
+
+    document.getElementById('result-title').textContent = results[winner].title;
+    document.getElementById('result-text').textContent = results[winner].text;
+
+    document.getElementById('quiz-panel').style.display = 'none';
+    const resultPanel = document.getElementById('result-panel');
+    resultPanel.style.display = 'block';
+    resultPanel.scrollIntoView({ behavior: 'smooth' });
+
+    // TODO: guardar { lead_id, perfil: winner } en Firestore (misma colección/patrón
+    // que lime_quiz_respuestas) para que llegue a HubSpot vía el webhook ya conectado.
+  });
+</script>
+
+</body>
+</html>
