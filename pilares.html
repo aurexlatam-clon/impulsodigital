@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De consumidor digital a emprendedor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-2:#111110;
+    --gold:#c9a44c;
+    --gold-soft:#e8d5a3;
+    --ink:#f2efe8;
+    --ink-dim:#9a958a;
+    --line:#232220;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'DM Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  #gate{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    text-align:center;
+  }
+  #gate p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:22px;
+    font-style:italic;
+    color:var(--ink-dim);
+  }
+  #content{display:none;}
+  .wrap{max-width:640px; margin:0 auto; padding:0 24px;}
+
+  /* Hero */
+  .hero{
+    padding:96px 0 64px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .eyebrow{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold-soft);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:'Syne', sans-serif;
+    font-weight:800;
+    font-size:clamp(34px, 6vw, 50px);
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero .sub{
+    margin-top:22px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:24px;
+    color:var(--ink-dim);
+    max-width:30ch;
+  }
+  .hero .anchor{
+    margin-top:32px;
+    font-size:15px;
+    color:var(--ink-dim);
+    max-width:52ch;
+    border-left:2px solid var(--gold);
+    padding-left:16px;
+  }
+
+  /* Pilar sections */
+  .pilar{
+    padding:72px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .pilar:last-of-type{border-bottom:none;}
+  .pilar .tag{
+    font-family:'DM Sans', sans-serif;
+    font-size:13px;
+    color:var(--gold);
+    letter-spacing:0.02em;
+    margin-bottom:14px;
+  }
+  .pilar h2{
+    font-family:'Syne', sans-serif;
+    font-weight:700;
+    font-size:clamp(26px, 4.5vw, 34px);
+    line-height:1.18;
+    max-width:20ch;
+  }
+  .pilar .lede{
+    margin-top:20px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:22px;
+    color:var(--gold-soft);
+    font-style:italic;
+    max-width:26ch;
+  }
+  .pilar p.body{
+    margin-top:18px;
+    font-size:16px;
+    color:var(--ink-dim);
+    max-width:52ch;
+  }
+  .checklist{
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .checklist .item{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    padding:16px 18px;
+    background:var(--bg-2);
+    border:1px solid var(--line);
+  }
+  .checklist .item .mark{
+    color:var(--gold);
+    font-size:15px;
+    margin-top:1px;
+    flex-shrink:0;
+  }
+  .checklist .item p{
+    font-size:15.5px;
+    color:var(--ink);
+  }
+
+  /* Cierre */
+  .cierre{
+    padding:72px 0 96px;
+  }
+  .cierre h2{
+    font-family:'Syne', sans-serif;
+    font-weight:700;
+    font-size:clamp(24px, 4.2vw, 30px);
+    max-width:18ch;
+  }
+  .cierre .q{
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
+  .cierre .q div{
+    border-bottom:1px solid var(--line);
+    padding-bottom:18px;
+  }
+  .cierre .q span{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold-soft);
+  }
+  .cierre .closing{
+    margin-top:36px;
+    font-size:15.5px;
+    color:var(--ink-dim);
+    max-width:48ch;
+  }
+  .cierre .signature{
+    margin-top:40px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:18px;
+    color:var(--ink-dim);
+  }
+
+  footer{
+    padding:40px 24px 56px;
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-dim);
+    border-top:1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<div id="gate"><p>Verificando acceso…</p></div>
+
+<div id="content">
+  <div class="wrap">
+
+    <section class="hero">
+      <div class="eyebrow">Una guía personal, no un curso genérico</div>
+      <h1>De consumidor digital a emprendedor</h1>
+      <p class="sub">Los 3 pilares para construir algo propio — incluso si no tienes experiencia previa.</p>
+      <p class="anchor">Esto lo aprendí de la forma difícil: viendo entrar y salir gente durante 20 años. No es una promesa de dinero fácil — es lo que de verdad separa a quien construye algo sólido de quien solo prueba una cosa tras otra.</p>
+    </section>
+
+    <section class="pilar">
+      <div class="tag">Pilar 1</div>
+      <h2>El sistema importa más que tu esfuerzo</h2>
+      <p class="lede">La pregunta no es cuánto puedes trabajar. Es de qué te estás apalancando.</p>
+      <p class="body">La mayoría cree que un negocio digital significa esfuerzo individual sin parar: vender uno por uno, buscar prospectos todos los días, depender al cien por ciento de tu propia energía. Un negocio bien elegido no funciona así. Te apalanca de algo más grande que tú — una comunidad, una estructura, un sistema — para que tu esfuerzo rinda más de lo que rendiría solo.</p>
+    </section>
+
+    <section class="pilar">
+      <div class="tag">Pilar 2</div>
+      <h2>Cómo distinguir un sistema real de una promesa vacía</h2>
+      <p class="lede">Si ya perdiste dinero antes, esa desconfianza es información válida — no un obstáculo.</p>
+      <p class="body">Antes de meter un peso en cualquier oportunidad, hazte estas cuatro preguntas:</p>
+      <div class="checklist">
+        <div class="item"><span class="mark">—</span><p>¿Es un pago único, o me van a seguir cobrando mes a mes?</p></div>
+        <div class="item"><span class="mark">—</span><p>¿Pierdo lo que construí si dejo de estar activo un tiempo?</p></div>
+        <div class="item"><span class="mark">—</span><p>¿El ingreso depende solo de traer gente, o hay algo más sosteniendo el sistema?</p></div>
+        <div class="item"><span class="mark">—</span><p>¿Puedo empezar con poco y medir resultados antes de comprometerme más?</p></div>
+      </div>
+      <p class="body">Estas cuatro preguntas te sirven para evaluar cualquier oportunidad que te llegue — hoy o en el futuro.</p>
+    </section>
+
+    <section class="pilar">
+      <div class="tag">Pilar 3</div>
+      <h2>Empieza chico, sin perder lo construido</h2>
+      <p class="lede">No necesitas capital grande para probar algo real.</p>
+      <p class="body">Lo importante es que lo que construyas al inicio no se pierda con el tiempo — que sea la base de algo más grande, no un experimento que se borra si te detienes un mes. Un primer paso bien dado se puede escalar después a otras oportunidades, con la comunidad y la experiencia que ya ganaste en el camino.</p>
+    </section>
+
+    <section class="cierre">
+      <h2>Tu mapa personal</h2>
+      <div class="q">
+        <div><span>¿Qué estoy buscando realmente: dinero rápido o algo que construya con el tiempo?</span></div>
+        <div><span>De las 4 preguntas del pilar 2, ¿cuántas puede responder bien lo que ya estoy considerando?</span></div>
+        <div><span>¿Qué tan dispuesto o dispuesta estoy a empezar chico y avanzar con paciencia?</span></div>
+      </div>
+      <p class="closing">No importa si al final decides que esto no es para ti. Lo que importa es que decidas con criterio — no con miedo, ni con prisa.</p>
+      <p class="signature">— Ale Torres</p>
+    </section>
+
+  </div>
+
+  <footer>AUREX · Riqueza en Expansión</footer>
+</div>
+
+<script>
+  // Verificación simple de acceso vía lead_id en la URL, contra Firestore (colección lime_leads)
+  // Reemplazar firebaseConfig con la config ya usada en index.html / lime-funnel-parte2.html
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const leadId = params.get('lead_id');
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('content');
+
+    if (!leadId) {
+      gate.innerHTML = '<p>Este contenido es exclusivo para quienes se registraron.<br>Regresa al enlace que recibiste por correo o WhatsApp.</p>';
+      return;
+    }
+
+    // TODO: sustituir por verificación real contra Firestore usando el SDK ya
+    // integrado en el proyecto (misma config de orygn-expansion), consultando
+    // la colección lime_leads por doc con id === leadId.
+    // Mientras se conecta, deja pasar cualquier lead_id no vacío:
+    gate.style.display = 'none';
+    content.style.display = 'block';
+  })();
+</script>
+
+</body>
+</html>
